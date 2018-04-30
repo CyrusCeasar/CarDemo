@@ -9,6 +9,8 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 
+import org.json.JSONObject;
+
 /**
  * 描述:
  * author:41264
@@ -27,7 +29,11 @@ public class TtsService implements InitListener,SynthesizerListener{
     @Override
     public void onInit(int i) {
         Log.d(TAG,"tts init reuslt:"+i);
-        ssth.startSpeaking("您好，这是csxd",this);
+        speak("语音合成引擎初始化完毕");
+    }
+
+    public void speak(String txt){
+        ssth.startSpeaking(txt,this);
     }
 
     @Override

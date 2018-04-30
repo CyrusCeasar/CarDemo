@@ -2,6 +2,9 @@ package com.csxd.cardemo;
 
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * 描述:
  * author:41264
@@ -20,6 +23,14 @@ public class AICenter {
         aiuiService = new AIUIService(context, new AIUIService.HandleListener() {
             @Override
             public void onHandleResult(String result) {
+                try {
+                    JSONObject jsonObject=new JSONObject(result);
+                    JSONObject answer = (JSONObject) jsonObject.get("answer");
+                    String content = answer.getString("text");
+                    ttsService.speak(content);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 wakeUpService.startListen();
             }
         });
